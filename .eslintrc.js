@@ -24,5 +24,6 @@ module.exports = {
         "no-empty": 1,
         'no-undef': 1,
         "react/jsx-key": 1,
+        "no-sparse-arrays": 0,
     }
 }

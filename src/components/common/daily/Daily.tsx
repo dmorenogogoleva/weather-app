@@ -1,44 +1,36 @@
 import React from "react";
-import { Rain } from "../../ui/icon/svg/Rain";
-import { TDaily } from "types/Daily";
 
 import { Icon } from "components/ui/icon";
+import { TDailyData } from "types";
 
 interface DailyProps {
-  items: TDaily[];
+  items?: TDailyData[];
 }
 
 export const DailyCard: React.FC<DailyProps> = ({ items }) => {
   return (
     <div className="daily">
-      <div className="daily-title">10-DAY FORECAST</div>
+      <h2 className="daily-title">10-DAY FORECAST</h2>
       <div className="daily-list">
-        {items.map(
-          ({
-            datetime,
-            temp,
-            range: { min, max },
-            periodRange: { min: lowest, max: highest },
-          }) => (
-            <div key={datetime} className="daily-row">
-              <div className="daily-time">{datetime}</div>
+        {items?.slice(0, 9).map(({ id, time, tempMin, tempMax }) => (
+          <div key={id} className="daily-row">
+            <div className="daily-time">{time}</div>
 
-              <div className="daily-conditions">
-                <Icon name="rain" />
-                <span className="probability">60%</span>
-              </div>
-
-              <div className="daily-range">
-                <span className="daily-min">{min}°</span>
-                <span className="range">
-                  <span className="range-meter" />
-                  <span className="range-current" />
-                </span>
-                <span className="daily-max">{max}°</span>
-              </div>
+            <div className="daily-conditions">
+              <Icon name="rain" />
+              <span className="probability">60%</span>
             </div>
-          )
-        )}
+
+            <div className="daily-range">
+              <span className="daily-min">{tempMin}°</span>
+              <span className="range">
+                <span className="range-meter" />
+                <span className="range-current" />
+              </span>
+              <span className="daily-max">{tempMax}°</span>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

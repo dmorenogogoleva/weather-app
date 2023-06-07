@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import * as api from "api";
-import { TIntervalData } from "api/types";
+import { transformApiResponse } from "utils";
+import { TIntervalData, TCurrentData, TDailyData } from "types";
 
-export function useWeatherData() {
+export function useWeatherData(): {
+  currentWeather?: TCurrentData;
+  hourlyForecast?: TIntervalData[];
+  dailyForecast?: TDailyData[];
+} {
   const [coords, setCoords] = useState<GeolocationCoordinates>();
-  const [city, setCity] = useState<string>("-");
   const [hourlyForecast, setHourlyForecast] = useState<TIntervalData[]>();
-  const [dailyForecast, setDailyForecast] = useState<TIntervalData[]>();
+  const [dailyForecast, setDailyForecast] = useState<TDailyData[]>();
+  const [currentWeather, setCurrentWeather] = useState<TCurrentData>();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -18,22 +23,30 @@ export function useWeatherData() {
     if (!coords) return;
 
     const { latitude, longitude } = coords;
-
+    // todo: add cache
     (async function getWeather() {
       try {
-        const [hourlyResponse, dailyResponse] = await Promise.all([
-          api.getHourlyWeather(latitude, longitude),
-          api.getDailyWeather(latitude, longitude),
-        ]);
+        const [currentResponse, hourlyResponse, dailyResponse] =
+          await Promise.all([
+            api.getCurrentWeather(latitude, longitude),
+            api.getHourlyWeather(latitude, longitude),
+            api.getDailyWeather(latitude, longitude),
+          ]);
 
-        setCity(hourlyResponse.city_name);
-        setHourlyForecast(dailyResponse.data);
-        setDailyForecast(dailyResponse.data);
+        const { current, daily, hourly } = transformApiResponse({
+          currentResponse,
+          hourlyResponse,
+          dailyResponse,
+        });
+
+        setCurrentWeather(current);
+        setDailyForecast(daily);
+        setHourlyForecast(hourly);
       } catch (err) {
         console.error(err);
       }
     })();
   }, [coords]);
 
-  return { city, hourlyForecast, dailyForecast };
+  return { currentWeather, hourlyForecast, dailyForecast };
 }

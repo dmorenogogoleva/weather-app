@@ -1,24 +1,24 @@
 import React from "react";
-import { THourly } from "types/Hourly";
 import { Icon } from "components/ui/icon";
+import { TIntervalData } from "types";
 
 interface ForecastProps {
-  items: THourly[];
+  items?: TIntervalData[];
 }
 
 export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
   return (
     <div className="forecast">
-      <div className="forecast-title">HOURLY FORECAST</div>
+      <h2 className="forecast-title">HOURLY FORECAST</h2>
       <div className="scroller">
         <div className="forecast-list">
-          {items.map(({ datetime, temperature }) => (
-            <div key={datetime} className="forecast-item">
-              <span>{datetime}</span>
+          {items?.slice(0, 4).map(({ id, temp, time }) => (
+            <div key={id} className="forecast-item">
+              <span>{time}</span>
               <span>
                 <Icon name="thunder" />
               </span>
-              <span>{temperature}</span>
+              <span>{temp}</span>
             </div>
           ))}
         </div>

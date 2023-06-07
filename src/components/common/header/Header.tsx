@@ -1,33 +1,25 @@
 import React from "react";
+import { TCurrentData } from "types/CurrentData";
+import { CURRENT_LOCATION, DEFAULT_VALUE } from "utils";
 
-interface HeaderProps {
-  current?: any;
-}
+type HeaderProps = TCurrentData;
 
-export const Header: React.FC<HeaderProps> = ({ current }) => {
+export const Header: React.FC<HeaderProps> = ({
+  city = CURRENT_LOCATION,
+  temp,
+  tempMax,
+  tempMin,
+  weather,
+}) => {
   return (
-    <div className="header">
-      <div className="location">{current.location.name}</div>
-      <div className="temp">{current.temp}</div>
-      <div className="conditions">
-        {current.cond == 0
-          ? "Sunny"
-          : current.cond == 1
-          ? "Partly Cloudy"
-          : current.cond == 2
-          ? "Cloudy"
-          : current.cond == 3
-          ? "Light Rain"
-          : current.cond == 4
-          ? "Rain"
-          : current.cond == 5
-          ? "Heavy Rain"
-          : current.cond == 6
-          ? "Thunder"
-          : ""}
+    <header className="header">
+      <h1 className="location">{city}</h1>
+      <span className="temp">{temp ?? DEFAULT_VALUE}</span>
+      <p className="conditions">
+        {weather ?? DEFAULT_VALUE}
         <br />
-        H:{current.range.max} L:{current.range.min}
-      </div>
-    </div>
+        H:{tempMax ?? DEFAULT_VALUE} L:{tempMin ?? DEFAULT_VALUE}
+      </p>
+    </header>
   );
 };
