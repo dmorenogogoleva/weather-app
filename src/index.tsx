@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./components/App";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 );
