@@ -15,8 +15,10 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "baseUrl": "./src",
     "paths": {
-      "api/*": ["./api/*"]
+      "api/*": ["./api/*"],
+      "types/*": ["./types/*"],
     }
   },
   "include": ["src"]
