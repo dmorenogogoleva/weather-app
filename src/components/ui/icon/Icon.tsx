@@ -1,5 +1,5 @@
 import React from "react";
-import { TIconName, iconsList } from "./IconsList";
+import { TIconName, iconsList } from "./icons-list";
 
 interface IconProps {
   name: TIconName;

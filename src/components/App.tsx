@@ -1,7 +1,6 @@
 import React from "react";
 import "../style.css";
 
-import { hourly, dailyForecast as daily } from "../data";
 import { Header } from "./common/header";
 import { HourlyCard } from "./common/hourly";
 import { DailyCard } from "./common/daily";

@@ -7,6 +7,7 @@ import { CURRENT_TIME, CURRENT_DAY, DEGREE_SYMBOL } from "./config";
 import { head } from "./head";
 import { getWeekday } from "./getWeekday";
 import { TDailyData, TCurrentData, TIntervalData } from "types";
+import { getIconName } from "./getIconName";
 
 function formatTemperature(temp: number) {
   return `${Math.round(temp)}${DEGREE_SYMBOL}`;
@@ -32,6 +33,7 @@ function transformHourlyApiResponse(
     time: formatTime(i.timestamp_local),
     humidity: i.rh,
     weather: i.weather.description,
+    iconName: getIconName(i.weather.code),
   }));
 
   return [
@@ -54,6 +56,7 @@ function transformDailyApiResponse(response: GetDailyResponse): TDailyData[] {
     time: formatDate(i.valid_date),
     humidity: i.rh,
     weather: i.weather.description,
+    iconName: getIconName(i.weather.code),
   }));
 }
 
