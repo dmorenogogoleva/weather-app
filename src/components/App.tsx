@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import "../style.css";
 
 import { Header } from "./common/header";
@@ -6,10 +6,16 @@ import { HourlyCard } from "./common/hourly";
 import { DailyCard } from "./common/daily";
 import { useWeatherData } from "hooks/useWeatherData";
 import { useDynamicBackgorund } from "hooks/useDynamicBackgorund";
+import { Loader } from "./ui/loader/Loader";
 
 const App: FC = () => {
   useDynamicBackgorund();
-  const { currentWeather, hourlyForecast, dailyForecast } = useWeatherData();
+  const { currentWeather, hourlyForecast, dailyForecast, isLoading } =
+    useWeatherData();
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <main>

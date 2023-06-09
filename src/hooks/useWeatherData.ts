@@ -7,11 +7,13 @@ export function useWeatherData(): {
   currentWeather?: TCurrentData;
   hourlyForecast?: TIntervalData[];
   dailyForecast?: TDailyData[];
+  isLoading: boolean;
 } {
   const [coords, setCoords] = useState<GeolocationCoordinates>();
   const [hourlyForecast, setHourlyForecast] = useState<TIntervalData[]>();
   const [dailyForecast, setDailyForecast] = useState<TDailyData[]>();
   const [currentWeather, setCurrentWeather] = useState<TCurrentData>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({ coords }) => {
@@ -26,6 +28,7 @@ export function useWeatherData(): {
     // todo: add cache
     (async function getWeather() {
       try {
+        setIsLoading(true);
         const [currentResponse, hourlyResponse, dailyResponse] =
           await Promise.all([
             api.getCurrentWeather(latitude, longitude),
@@ -44,9 +47,11 @@ export function useWeatherData(): {
         setHourlyForecast(hourly);
       } catch (err) {
         console.error(err);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, [coords]);
 
-  return { currentWeather, hourlyForecast, dailyForecast };
+  return { currentWeather, hourlyForecast, dailyForecast, isLoading };
 }
