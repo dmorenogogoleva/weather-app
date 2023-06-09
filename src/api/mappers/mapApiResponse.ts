@@ -3,27 +3,18 @@ import {
   GetDailyResponse,
   GetHourlyResponse,
 } from "api/types";
-import { CURRENT_TIME, CURRENT_DAY, DEGREE_SYMBOL } from "./config";
-import { head } from "./head";
-import { getWeekday } from "./getWeekday";
+import {
+  CURRENT_TIME,
+  head,
+  getIconName,
+  formatTemperature,
+  formatTime,
+  formatDate,
+} from "utils";
+
 import { TDailyData, TCurrentData, TIntervalData } from "types";
-import { getIconName } from "./getIconName";
 
-function formatTemperature(temp: number) {
-  return `${Math.round(temp)}${DEGREE_SYMBOL}`;
-}
-
-function formatTime(datetime: string) {
-  return new Date(datetime).getHours().toString();
-}
-
-function formatDate(date: string) {
-  return new Date(date).getDate() === new Date().getDate()
-    ? CURRENT_DAY
-    : getWeekday(date);
-}
-
-function transformHourlyApiResponse(
+function mapHourlyApiResponse(
   response: GetHourlyResponse,
   current: TCurrentData
 ): TIntervalData[] {
@@ -47,7 +38,7 @@ function transformHourlyApiResponse(
   ];
 }
 
-function transformDailyApiResponse(response: GetDailyResponse): TDailyData[] {
+function mapDailyApiResponse(response: GetDailyResponse): TDailyData[] {
   return response.data.data.map((i) => ({
     id: i.valid_date,
     tempMin: formatTemperature(i.min_temp),
@@ -60,7 +51,7 @@ function transformDailyApiResponse(response: GetDailyResponse): TDailyData[] {
   }));
 }
 
-function transformCurrentApiResponse(
+function mapCurrentApiResponse(
   response: GetCurrentResponse,
   today?: TDailyData
 ): TCurrentData {
@@ -74,7 +65,7 @@ function transformCurrentApiResponse(
   };
 }
 
-export function transformApiResponse({
+export function mapApiResponse({
   currentResponse,
   hourlyResponse,
   dailyResponse,
@@ -83,9 +74,9 @@ export function transformApiResponse({
   hourlyResponse: GetHourlyResponse;
   dailyResponse: GetDailyResponse;
 }): { current: TCurrentData; daily: TDailyData[]; hourly: TIntervalData[] } {
-  const daily = transformDailyApiResponse(dailyResponse);
-  const current = transformCurrentApiResponse(currentResponse, head(daily));
-  const hourly = transformHourlyApiResponse(hourlyResponse, current);
+  const daily = mapDailyApiResponse(dailyResponse);
+  const current = mapCurrentApiResponse(currentResponse, head(daily));
+  const hourly = mapHourlyApiResponse(hourlyResponse, current);
 
   return { current, daily, hourly };
 }

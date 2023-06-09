@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import * as api from "api";
-import { transformApiResponse } from "utils";
 import { TIntervalData, TCurrentData, TDailyData } from "types";
+import { mapApiResponse } from "api/mappers/mapApiResponse";
 
 export function useWeatherData(): {
   currentWeather?: TCurrentData;
@@ -33,7 +33,7 @@ export function useWeatherData(): {
             api.getDailyWeather(latitude, longitude),
           ]);
 
-        const { current, daily, hourly } = transformApiResponse({
+        const { current, daily, hourly } = mapApiResponse({
           currentResponse,
           hourlyResponse,
           dailyResponse,

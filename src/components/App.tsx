@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import "../style.css";
 
 import { Header } from "./common/header";
@@ -6,7 +6,7 @@ import { HourlyCard } from "./common/hourly";
 import { DailyCard } from "./common/daily";
 import { useWeatherData } from "hooks/useWeatherData";
 
-function App() {
+const App: FC = () => {
   const { currentWeather, hourlyForecast, dailyForecast } = useWeatherData();
 
   return (
@@ -16,6 +16,6 @@ function App() {
       <DailyCard items={dailyForecast} />
     </main>
   );
-}
+};
 
 export default App;
