@@ -11,10 +11,8 @@ import { Thunder } from "./svg/Thunder";
 export const strictCodeIcons: Record<string, TIconName> = {
   500: "light-rain",
   502: "heavy-rain",
-  801: "clouds",
-  802: "clouds",
-  803: "clouds",
-  804: "clouds",
+  800: "clear-sky",
+  801: "clear-sky",
 };
 
 export const generalCodeIcons: Record<string, TIconName> = {
@@ -23,7 +21,7 @@ export const generalCodeIcons: Record<string, TIconName> = {
   5: "rain",
   6: "snow",
   7: "fog",
-  8: "clear-sky",
+  8: "clouds",
 };
 
 export const iconsList = {

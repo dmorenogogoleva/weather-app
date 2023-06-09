@@ -13,7 +13,7 @@ export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
       <h2 className="forecast-title">HOURLY FORECAST</h2>
       <div className="scroller">
         <div className="forecast-list">
-          {items?.slice(0, 4).map(({ id, temp, time, iconName }) => (
+          {items?.slice(0, 5).map(({ id, temp, time, iconName }) => (
             <div key={id} className="forecast-item">
               <span>{time}</span>
               <span>{iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}</span>

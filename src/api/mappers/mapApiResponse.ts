@@ -33,6 +33,7 @@ function mapHourlyApiResponse(
       time: CURRENT_TIME,
       temp: current.temp,
       weather: current.weather,
+      iconName: current.iconName,
     },
     ...responseData,
   ];
@@ -62,6 +63,7 @@ function mapCurrentApiResponse(
     weather: curr.weather.description,
     tempMax: today?.tempMax,
     tempMin: today?.tempMin,
+    iconName: getIconName(curr.weather.code),
   };
 }
 
