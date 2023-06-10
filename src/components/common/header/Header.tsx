@@ -2,6 +2,8 @@ import React from "react";
 import { TCurrentData } from "types/CurrentData";
 import { CURRENT_LOCATION, DEFAULT_VALUE } from "utils";
 
+import styles from "./Header.module.css";
+
 type HeaderProps = TCurrentData;
 
 export const Header: React.FC<HeaderProps> = ({
@@ -12,14 +14,14 @@ export const Header: React.FC<HeaderProps> = ({
   weather,
 }) => {
   return (
-    <header className="header">
-      <h1 className="location">{city}</h1>
-      <span className="temp">{temp ?? DEFAULT_VALUE}</span>
-      <p className="conditions">
-        {weather ?? DEFAULT_VALUE}
-        <br />
-        H:{tempMax ?? DEFAULT_VALUE} L:{tempMin ?? DEFAULT_VALUE}
-      </p>
+    <header className={styles.header}>
+      <h1 className="title-h1">{city}</h1>
+      <span className={styles.temp}>{temp || DEFAULT_VALUE}</span>
+      <span className={styles.description}>{weather ?? DEFAULT_VALUE}</span>
+      <span className={styles.range}>
+        <span>H:{tempMax || DEFAULT_VALUE}</span>
+        <span>L:{tempMin || DEFAULT_VALUE}</span>
+      </span>
     </header>
   );
 };

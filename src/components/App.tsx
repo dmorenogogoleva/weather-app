@@ -1,9 +1,8 @@
 import React, { FC } from "react";
 import "../style.css";
-
 import { Header } from "./common/header";
 import { HourlyCard } from "./common/hourly-card";
-import { DailyCard } from "./common/daily";
+import { DailyCard } from "./common/daily-card";
 import { useWeatherData } from "hooks/useWeatherData";
 import { useDynamicBackgorund } from "hooks/useDynamicBackgorund";
 import { Loader } from "./ui/loader/Loader";

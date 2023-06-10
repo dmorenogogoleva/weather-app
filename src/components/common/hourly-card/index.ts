@@ -1,1 +1,1 @@
-export { HourlyCard } from "./Hourly";
+export { HourlyCard } from "./HourlyCard";

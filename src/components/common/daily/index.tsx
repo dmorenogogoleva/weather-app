@@ -1,1 +1,0 @@
-export { DailyCard } from "./Daily";

@@ -1,0 +1,14 @@
+.card {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: var(--border);
+  border-radius: 15px;
+}
+
+.list-horizontal {
+  display: flex;
+  overflow-y: auto;
+  scroll-snap-type: x mandatory;
+  padding-top: 14px;
+  gap: 20px;
+}

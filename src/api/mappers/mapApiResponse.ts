@@ -59,7 +59,7 @@ function mapCurrentApiResponse(
   const curr = response.data.data[0];
   return {
     city: curr.city_name,
-    temp: formatTemperature(curr.temp),
+    temp: formatTemperature(curr.temp, false),
     weather: curr.weather.description,
     tempMax: today?.tempMax,
     tempMin: today?.tempMin,

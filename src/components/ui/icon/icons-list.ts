@@ -1,3 +1,4 @@
+import { Calendar } from "./svg/Calendar";
 import { ClearSky } from "./svg/ClearSky";
 import { Clouds } from "./svg/Clouds";
 import { Fog } from "./svg/Fog";
@@ -25,6 +26,7 @@ export const generalCodeIcons: Record<string, TIconName> = {
 };
 
 export const iconsList = {
+  calendar: Calendar,
   rain: Rain,
   "heavy-rain": HeavyRain,
   "light-rain": LightRain,
