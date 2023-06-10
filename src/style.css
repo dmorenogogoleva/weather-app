@@ -28,6 +28,14 @@ svg {
   color: white;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
 #root>main {
   min-width: 320px;
   max-width: 460px;
@@ -67,10 +75,6 @@ svg {
   letter-spacing: 0.05em;
   padding-bottom: 8px;
   font-weight: 400;
-}
-
-.scroller {
-  overflow: hidden;
 }
 
 .forecast-list {

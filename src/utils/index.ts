@@ -5,3 +5,4 @@ export * from "./getIconName";
 export * from "./formatTemperature";
 export * from "./formatDate";
 export * from "./formatTime";
+export * from "./buildClassName";

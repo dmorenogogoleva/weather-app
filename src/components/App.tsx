@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import "../style.css";
 
 import { Header } from "./common/header";
-import { HourlyCard } from "./common/hourly";
+import { HourlyCard } from "./common/hourly-card";
 import { DailyCard } from "./common/daily";
 import { useWeatherData } from "hooks/useWeatherData";
 import { useDynamicBackgorund } from "hooks/useDynamicBackgorund";

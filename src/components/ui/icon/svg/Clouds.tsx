@@ -4,7 +4,7 @@ export const Clouds = () => {
   return (
     <svg
       width="30px"
-      viewBox="0 0 40 40"
+      viewBox="0 9 40 40"
       preserveAspectRatio="none"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
