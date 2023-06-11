@@ -19,8 +19,8 @@ export const Header: React.FC<HeaderProps> = ({
       <span className={styles.temp}>{temp || DEFAULT_VALUE}</span>
       <span className={styles.description}>{weather ?? DEFAULT_VALUE}</span>
       <span className={styles.range}>
-        <span>H:{formatTemperature(tempMax) || DEFAULT_VALUE}</span>
-        <span>L:{formatTemperature(tempMin) || DEFAULT_VALUE}</span>
+        <span>H:{formatTemperature(tempMax)}</span>
+        <span>L:{formatTemperature(tempMin)}</span>
       </span>
     </header>
   );

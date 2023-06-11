@@ -28,7 +28,7 @@ export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
           </span>
           {iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}
           <span className={styles.temp}>
-            {formatTemperature(temp) || DEFAULT_VALUE}
+            {formatTemperature(temp)}
           </span>
         </div>
       ))}
