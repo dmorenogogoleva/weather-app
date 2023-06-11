@@ -15,7 +15,7 @@ function mapHourlyApiResponse(
     id: i.timestamp_local,
     temp: Math.round(i.temp),
     time: i.timestamp_local,
-    humidity: i.rh,
+    precip: i.pop,
     weather: i.weather.description,
     iconName: getIconName(i.weather.code),
   }));
@@ -39,7 +39,7 @@ function mapDailyApiResponse(response: GetDailyResponse): TDailyData[] {
     tempMax: Math.round(i.max_temp),
     temp: Math.round(i.temp),
     time: formatDate(i.valid_date),
-    humidity: i.rh,
+    precip: i.pop,
     weather: i.weather.description,
     iconName: getIconName(i.weather.code),
   }));

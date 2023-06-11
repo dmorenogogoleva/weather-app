@@ -6,7 +6,7 @@ type TWeather = {
 
 type TIntervalApi = {
   temp: number;
-  rh: number;
+  pop: number;
   weather: TWeather;
 };
 

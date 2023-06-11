@@ -27,7 +27,7 @@ export const DailyRow: React.FC<DailyRowProps> = ({
   currentTemp,
 }) => {
   const [values, setGradientValues] = useState<TGradientValues>();
-  const { time, iconName, humidity, tempMin, tempMax } = item;
+  const { time, iconName, precip, tempMin, tempMax } = item;
 
   useEffect(() => {
     if (!range) return;
@@ -46,7 +46,7 @@ export const DailyRow: React.FC<DailyRowProps> = ({
       <div className={styles.time}>{time}</div>
       <div className={styles.conditions}>
         {iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}
-        <span className={styles.probability}>{humidity}%</span>
+        {precip ? <span className={styles.probability}>{precip}%</span> : null}
       </div>
       <div className={styles.temp}>
         <span className={styles.min}>{formatTemperature(tempMin)}</span>

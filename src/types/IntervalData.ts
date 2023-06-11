@@ -4,7 +4,7 @@ export type TIntervalData = {
   id: string;
   temp?: number;
   weather?: string;
-  humidity?: number;
+  precip?: number;
   time: string;
   iconName?: TIconName;
 };
