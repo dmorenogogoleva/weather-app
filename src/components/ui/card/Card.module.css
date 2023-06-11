@@ -12,3 +12,7 @@
   padding-top: 14px;
   gap: 20px;
 }
+
+.list-horizontal>*:last-child {
+  margin-right: 10px;
+}

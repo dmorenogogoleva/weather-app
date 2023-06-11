@@ -3,7 +3,7 @@ import {
   GetDailyResponse,
   GetHourlyResponse,
 } from "api/types";
-import { CURRENT_TIME, head, getIconName, formatTime, formatDate } from "utils";
+import { CURRENT_TIME, head, getIconName, formatDate } from "utils";
 
 import { TDailyData, TCurrentData, TIntervalData } from "types";
 
@@ -14,7 +14,7 @@ function mapHourlyApiResponse(
   const responseData = response.data.data.map((i) => ({
     id: i.timestamp_local,
     temp: Math.round(i.temp),
-    time: formatTime(i.timestamp_local),
+    time: i.timestamp_local,
     humidity: i.rh,
     weather: i.weather.description,
     iconName: getIconName(i.weather.code),

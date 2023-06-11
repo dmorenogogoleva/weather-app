@@ -5,6 +5,6 @@ export type TIntervalData = {
   temp?: number;
   weather?: string;
   humidity?: number;
-  time?: string;
+  time: string;
   iconName?: TIconName;
 };
