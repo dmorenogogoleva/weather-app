@@ -5,7 +5,7 @@ export const Fog = () => {
     <svg
       fill="white"
       width="26px"
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMinYMin slice"
       viewBox="0 0 56 56"
       xmlns="http://www.w3.org/2000/svg"
     >
