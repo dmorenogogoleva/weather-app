@@ -1,10 +1,10 @@
 import { TIconName } from "components/ui/icon/icons-list";
 
 export type TCurrentData = {
-  temp?: string;
+  temp?: number;
   weather?: string;
   city?: string;
-  tempMin?: string;
-  tempMax?: string;
+  tempMin?: number;
+  tempMax?: number;
   iconName?: TIconName;
 };

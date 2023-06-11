@@ -3,14 +3,7 @@ import {
   GetDailyResponse,
   GetHourlyResponse,
 } from "api/types";
-import {
-  CURRENT_TIME,
-  head,
-  getIconName,
-  formatTemperature,
-  formatTime,
-  formatDate,
-} from "utils";
+import { CURRENT_TIME, head, getIconName, formatTime, formatDate } from "utils";
 
 import { TDailyData, TCurrentData, TIntervalData } from "types";
 
@@ -20,7 +13,7 @@ function mapHourlyApiResponse(
 ): TIntervalData[] {
   const responseData = response.data.data.map((i) => ({
     id: i.timestamp_local,
-    temp: formatTemperature(i.temp),
+    temp: Math.round(i.temp),
     time: formatTime(i.timestamp_local),
     humidity: i.rh,
     weather: i.weather.description,
@@ -42,9 +35,9 @@ function mapHourlyApiResponse(
 function mapDailyApiResponse(response: GetDailyResponse): TDailyData[] {
   return response.data.data.map((i) => ({
     id: i.valid_date,
-    tempMin: formatTemperature(i.min_temp),
-    tempMax: formatTemperature(i.max_temp),
-    temp: formatTemperature(i.temp),
+    tempMin: Math.round(i.min_temp),
+    tempMax: Math.round(i.max_temp),
+    temp: Math.round(i.temp),
     time: formatDate(i.valid_date),
     humidity: i.rh,
     weather: i.weather.description,
@@ -59,7 +52,7 @@ function mapCurrentApiResponse(
   const curr = response.data.data[0];
   return {
     city: curr.city_name,
-    temp: formatTemperature(curr.temp, false),
+    temp: Math.round(curr.temp),
     weather: curr.weather.description,
     tempMax: today?.tempMax,
     tempMin: today?.tempMin,

@@ -20,7 +20,7 @@ const App: FC = () => {
     <main>
       <Header {...currentWeather} />
       <HourlyCard items={hourlyForecast} />
-      <DailyCard items={dailyForecast} />
+      <DailyCard items={dailyForecast} currentTemp={currentWeather?.temp} />
     </main>
   );
 };

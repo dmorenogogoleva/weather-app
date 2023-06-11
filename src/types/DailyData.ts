@@ -1,6 +1,6 @@
 import { TIntervalData } from "./IntervalData";
 
 export type TDailyData = {
-  tempMin: string;
-  tempMax: string;
+  tempMin: number;
+  tempMax: number;
 } & TIntervalData;

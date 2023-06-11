@@ -1,6 +1,6 @@
 import React from "react";
 import { TCurrentData } from "types/CurrentData";
-import { CURRENT_LOCATION, DEFAULT_VALUE } from "utils";
+import { CURRENT_LOCATION, DEFAULT_VALUE, formatTemperature } from "utils";
 
 import styles from "./Header.module.css";
 
@@ -19,8 +19,8 @@ export const Header: React.FC<HeaderProps> = ({
       <span className={styles.temp}>{temp || DEFAULT_VALUE}</span>
       <span className={styles.description}>{weather ?? DEFAULT_VALUE}</span>
       <span className={styles.range}>
-        <span>H:{tempMax || DEFAULT_VALUE}</span>
-        <span>L:{tempMin || DEFAULT_VALUE}</span>
+        <span>H:{formatTemperature(tempMax) || DEFAULT_VALUE}</span>
+        <span>L:{formatTemperature(tempMin) || DEFAULT_VALUE}</span>
       </span>
     </header>
   );

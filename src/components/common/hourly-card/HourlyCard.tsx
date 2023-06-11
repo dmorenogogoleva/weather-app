@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "components/ui/icon";
 import { TIntervalData } from "types";
-import { DEFAULT_VALUE } from "utils";
+import { DEFAULT_VALUE, formatTemperature } from "utils";
 import { Card } from "components/ui/card";
 
 import styles from "./HourlyCard.module.css";
@@ -17,7 +17,9 @@ export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
         <div key={id} className={styles.item}>
           <span className={styles.time}>{time || DEFAULT_VALUE}</span>
           {iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}
-          <span className={styles.temp}>{temp || DEFAULT_VALUE}</span>
+          <span className={styles.temp}>
+            {formatTemperature(temp) || DEFAULT_VALUE}
+          </span>
         </div>
       ))}
     </Card>

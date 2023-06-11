@@ -44,9 +44,8 @@
 
 .probability {
   display: block;
-  font-size: 12px;
-  line-height: 0.8;
-  margin: -5px 0 5px;
+  font-size: 1.2rem;
+  line-height: 0.8rem;
   color: #81cffa;
 }
 
@@ -58,15 +57,13 @@
   height: 4px;
   border-radius: 5px;
   position: relative;
+  overflow: hidden;
 }
 
 /* Shows the range of lowest and highest 
      temperatures of each day in comparison 
      to the range of the whole period */
 .range-meter {
-  --left: 10%;
-  --right: 0%;
-
   position: absolute;
   left: var(--left);
   right: var(--right);
@@ -93,5 +90,15 @@
   border-radius: 5px;
 }
 
-/* should be the dot */
-.range-current {}
+.row:first-child .range-current {
+  width: 4px;
+  height: 4px;
+  border: 1px solid #888;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  transform: translateX(-50%);
+  left: var(--current);
+  top: -1px;
+  box-sizing: content-box;
+}
