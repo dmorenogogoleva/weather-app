@@ -1,7 +1,12 @@
 import React, { useMemo } from "react";
 import { Icon } from "components/ui/icon";
 import { TIntervalData } from "types";
-import { DEFAULT_VALUE, formatTemperature, formatTime } from "utils";
+import {
+  CURRENT_TIME,
+  DEFAULT_VALUE,
+  formatTemperature,
+  formatTime,
+} from "utils";
 import { Card } from "components/ui/card";
 
 import styles from "./HourlyCard.module.css";
@@ -14,7 +19,9 @@ export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
   const itemsUntilNextDay = useMemo(
     () =>
       items?.filter(
-        (it) => new Date(it.time).getDate() === new Date().getDate()
+        (it) =>
+          new Date(it.time).getDate() === new Date().getDate() ||
+          it.time === CURRENT_TIME
       ),
     [items]
   );
@@ -27,9 +34,7 @@ export const HourlyCard: React.FC<ForecastProps> = ({ items }) => {
             {formatTime(time) || DEFAULT_VALUE}
           </span>
           {iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}
-          <span className={styles.temp}>
-            {formatTemperature(temp)}
-          </span>
+          <span className={styles.temp}>{formatTemperature(temp)}</span>
         </div>
       ))}
     </Card>
