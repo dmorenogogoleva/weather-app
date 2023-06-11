@@ -21,7 +21,7 @@ export function useWeatherData(): {
         setCoords(coords);
       },
       console.error,
-      { maximumAge: 3600 * 1000 }
+      { enableHighAccuracy: false, maximumAge: Infinity }
     );
   }, []);
 
