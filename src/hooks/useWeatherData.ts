@@ -16,19 +16,38 @@ export function useWeatherData(): {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(({ coords }) => {
-      setCoords(coords);
-    });
+    navigator.geolocation.getCurrentPosition(
+      ({ coords }) => {
+        setCoords(coords);
+      },
+      console.error,
+      { maximumAge: 3600 * 1000 }
+    );
   }, []);
 
   useEffect(() => {
-    if (!coords) return;
+    const storedCurrent = localStorage.getItem("current");
+    const storedDaily = localStorage.getItem("daily");
+    const storedHourly = localStorage.getItem("hourly");
+    const timestamp = localStorage.getItem("timestamp");
 
+    const isStoredDataActual =
+      new Date(Number(timestamp)).getDate() === new Date().getDate() &&
+      new Date(Number(timestamp)).getHours() === new Date().getHours();
+
+    if (isStoredDataActual && storedCurrent && storedDaily && storedHourly) {
+      setCurrentWeather(JSON.parse(storedCurrent));
+      setDailyForecast(JSON.parse(storedDaily));
+      setHourlyForecast(JSON.parse(storedHourly));
+      setIsLoading(false);
+      return;
+    }
+
+    if (!coords) return;
     const { latitude, longitude } = coords;
-    // todo: add cache
+
     (async function getWeather() {
       try {
-        setIsLoading(true);
         const [currentResponse, hourlyResponse, dailyResponse] =
           await Promise.all([
             api.getCurrentWeather(latitude, longitude),
@@ -45,6 +64,11 @@ export function useWeatherData(): {
         setCurrentWeather(current);
         setDailyForecast(daily);
         setHourlyForecast(hourly);
+
+        localStorage.setItem("current", JSON.stringify(current));
+        localStorage.setItem("daily", JSON.stringify(daily));
+        localStorage.setItem("hourly", JSON.stringify(hourly));
+        localStorage.setItem("timestamp", JSON.stringify(Date.now()));
       } catch (err) {
         console.error(err);
       } finally {
