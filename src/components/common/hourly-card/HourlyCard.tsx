@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Icon } from "components/ui/icon";
 import { TIntervalData } from "types";
 import { DEFAULT_VALUE, formatTemperature, formatTime } from "utils";

@@ -9,21 +9,10 @@ export function useWeatherData(): {
   dailyForecast?: TDailyData[];
   isLoading: boolean;
 } {
-  const [coords, setCoords] = useState<GeolocationCoordinates>();
   const [hourlyForecast, setHourlyForecast] = useState<TIntervalData[]>();
   const [dailyForecast, setDailyForecast] = useState<TDailyData[]>();
   const [currentWeather, setCurrentWeather] = useState<TCurrentData>();
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords }) => {
-        setCoords(coords);
-      },
-      console.error,
-      { enableHighAccuracy: false, maximumAge: Infinity }
-    );
-  }, []);
 
   useEffect(() => {
     const storedCurrent = localStorage.getItem("current");
@@ -43,10 +32,28 @@ export function useWeatherData(): {
       return;
     }
 
-    if (!coords) return;
-    const { latitude, longitude } = coords;
+    (async function () {
+      const [coords, error] = await new Promise<
+        [GeolocationCoordinates | null, unknown]
+      >((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(
+          ({ coords }) => resolve([coords, null]),
+          (error) => reject([null, error]),
+          { enableHighAccuracy: false, maximumAge: 3600 * 1000 * 24 }
+        );
+      });
 
-    (async function getWeather() {
+      if (!coords) {
+        console.error(
+          error instanceof Error
+            ? error?.message
+            : "Failed to load current position"
+        );
+        return;
+      }
+
+      if (!coords) return;
+      const { latitude, longitude } = coords;
       try {
         const [currentResponse, hourlyResponse, dailyResponse] =
           await Promise.all([
@@ -75,7 +82,7 @@ export function useWeatherData(): {
         setIsLoading(false);
       }
     })();
-  }, [coords]);
+  }, []);
 
   return { currentWeather, hourlyForecast, dailyForecast, isLoading };
 }
