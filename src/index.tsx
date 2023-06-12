@@ -3,6 +3,7 @@ import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./components/App";
 import { ErrorBoundary } from "components/ErrorBoundary";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 dotenv.config();
 
@@ -18,11 +19,4 @@ root.render(
   </StrictMode>
 );
 
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker
-      .register("./serviceWorker.js")
-      .then((res) => console.log("service worker registered", res))
-      .catch((err) => console.error("service worker not registered", err));
-  });
-}
+serviceWorkerRegistration.register();
