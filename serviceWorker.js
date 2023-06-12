@@ -4,7 +4,7 @@ const assets = [
   "./favicon.png",
   "./manifest.json",
   "./robots.txt",
-  "./static/"
+  "./static/js/*.chunk.js"
 ]
 
 self.addEventListener("install", installEvent => {
