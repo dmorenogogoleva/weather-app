@@ -5,14 +5,17 @@ interface ErrorBoundaryProps {
   children: ReactNode;
 }
 
+interface ServiceErrorBoundaryState {
+  hasError: boolean;
+}
+
 export class ErrorBoundary extends React.Component<
   ErrorBoundaryProps,
-  { hasError: boolean }
+  ServiceErrorBoundaryState
 > {
   state = { hasError: false };
 
   static getDerivedStateFromError() {
-    // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
@@ -22,7 +25,7 @@ export class ErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      return <div>fallback</div>;
+      return <div>error</div>;
     }
 
     return this.props.children;
