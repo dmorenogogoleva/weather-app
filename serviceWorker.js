@@ -1,9 +1,8 @@
 const weatherApp = "weather-app-v1"
 const assets = [
   "/",
-  '/favicon.png',
   "/index.html",
-  "/static/*",
+  '/robots.txt'
 ]
 
 self.addEventListener("install", installEvent => {
@@ -14,7 +13,7 @@ self.addEventListener("install", installEvent => {
     caches.open(weatherApp).then(cache => {
       console.log('assets:', assets)
       cache.addAll(assets)
-    })
+    }).catch((er) => console.error('sw error', er))
   )
 })
 
