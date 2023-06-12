@@ -1,6 +1,9 @@
 const weatherApp = "weather-app-v1"
 const assets = [
-  "./index.html"
+  "./index.html",
+  "./favicon.png",
+  "./manifest.json",
+  "./robots.txt",
 ]
 
 self.addEventListener("install", installEvent => {
