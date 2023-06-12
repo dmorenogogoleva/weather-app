@@ -46,7 +46,9 @@ export const DailyRow: React.FC<DailyRowProps> = ({
       <div className={styles.time}>{time}</div>
       <div className={styles.conditions}>
         {iconName ? <Icon name={iconName} /> : DEFAULT_VALUE}
-        {precip ? <span className={styles.probability}>{precip}%</span> : null}
+        {Number(precip) >= 20 ? (
+          <span className={styles.probability}>{precip}%</span>
+        ) : null}
       </div>
       <div className={styles.temp}>
         <span className={styles.min}>{formatTemperature(tempMin)}</span>

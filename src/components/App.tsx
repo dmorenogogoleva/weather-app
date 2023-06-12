@@ -7,6 +7,8 @@ import { useWeatherData } from "hooks/useWeatherData";
 import { useDynamicBackgorund } from "hooks/useDynamicBackgorund";
 import { Loader } from "./ui/loader/Loader";
 
+import styles from "./App.module.css";
+
 const App: FC = () => {
   useDynamicBackgorund();
   const { currentWeather, hourlyForecast, dailyForecast, isLoading } =
@@ -17,11 +19,13 @@ const App: FC = () => {
   }
 
   return (
-    <main>
+    <>
       <Header {...currentWeather} />
-      <HourlyCard items={hourlyForecast} />
-      <DailyCard items={dailyForecast} currentTemp={currentWeather?.temp} />
-    </main>
+      <main className={styles.main}>
+        <HourlyCard items={hourlyForecast} />
+        <DailyCard items={dailyForecast} currentTemp={currentWeather?.temp} />
+      </main>
+    </>
   );
 };
 

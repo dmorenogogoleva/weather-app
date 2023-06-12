@@ -5,5 +5,5 @@ export function formatTime(datetime?: string): string {
 
   if (datetime === CURRENT_TIME) return datetime;
 
-  return new Date(datetime).getHours().toString();
+  return new Date(datetime).getHours().toString().padStart(2, "0");
 }

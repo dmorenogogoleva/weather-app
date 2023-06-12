@@ -55,11 +55,6 @@ h1, h2, h3, h4, h5, h6, body, header, p {
   display: none;
 }
 
-#root>main {
-  min-width: 320px;
-  max-width: 460px;
-  padding: 10px;
-}
 
 .title-h1 {
   font-size: var(--title-h1-font-size);
@@ -79,9 +74,4 @@ h1, h2, h3, h4, h5, h6, body, header, p {
   gap: 5px;
   padding-bottom: 8px;
   border-bottom: var(--border);
-
-}
-
-.location {
-  font-size: 3.7rem;
 }
