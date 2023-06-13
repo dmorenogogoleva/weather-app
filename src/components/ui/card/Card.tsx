@@ -19,12 +19,12 @@ export const Card: React.FC<CardProps> = ({
   className,
 }) => {
   return (
-    <div className={buildClassName(styles.card, className)}>
+    <section className={buildClassName(styles.card, className)}>
       <h2 className="title-h2">
         <Icon name="calendar" />
         {title}
       </h2>
       <div className={styles[`list-${[kind]}`]}>{children}</div>
-    </div>
+    </section>
   );
 };
