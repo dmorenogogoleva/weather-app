@@ -32,7 +32,12 @@ export function useWeatherData(): {
       const coords = await new Promise<GeolocationCoordinates>((resolve) => {
         navigator.geolocation.getCurrentPosition(
           (p) => resolve(p.coords),
-          (e) => toast.error(e.message),
+          (e) => {
+            toast.error(e.message);
+            toast("Please allow this website to use Geolocation", {
+              duration: Infinity,
+            });
+          },
           { enableHighAccuracy: false, maximumAge: 3600 * 1000 * 24 }
         );
       });
