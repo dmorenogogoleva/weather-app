@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import * as api from "api";
 import { TIntervalData, TCurrentData, TDailyData } from "types";
 import { mapApiResponse } from "api/mappers/mapApiResponse";
+import { setToStore, getFromStore } from "lib/weatherStorageManager";
+import toast from "react-hot-toast";
 
 export function useWeatherData(): {
   currentWeather?: TCurrentData;
@@ -15,27 +17,19 @@ export function useWeatherData(): {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedCurrent = localStorage.getItem("current");
-    const storedDaily = localStorage.getItem("daily");
-    const storedHourly = localStorage.getItem("hourly");
-    const timestamp = localStorage.getItem("timestamp");
+    const storedData = getFromStore();
 
-    const isStoredDataActual =
-      new Date(Number(timestamp)).getDate() === new Date().getDate() &&
-      new Date(Number(timestamp)).getHours() === new Date().getHours();
-
-    if (isStoredDataActual && storedCurrent && storedDaily && storedHourly) {
-      setCurrentWeather(JSON.parse(storedCurrent));
-      setDailyForecast(JSON.parse(storedDaily));
-      setHourlyForecast(JSON.parse(storedHourly));
+    if (storedData) {
+      const { storedCurrent, storedDaily, storedHourly } = storedData;
+      setCurrentWeather(storedCurrent);
+      setDailyForecast(storedDaily);
+      setHourlyForecast(storedHourly);
       setIsLoading(false);
       return;
     }
 
-    (async function () {
-      const [coords, error] = await new Promise<
-        [GeolocationCoordinates | null, unknown]
-      >((resolve, reject) => {
+    async function fetch() {
+      const coords = await new Promise<GeolocationCoordinates>((resolve) => {
         navigator.geolocation.getCurrentPosition(
           (p) => resolve(p.coords),
           (e) => toast.error(e.message),
@@ -43,18 +37,10 @@ export function useWeatherData(): {
         );
       });
 
-      if (!coords) {
-        console.error(
-          error instanceof Error
-            ? error?.message
-            : "Failed to load current position"
-        );
-        return;
-      }
-
       if (!coords) return;
-      const { latitude, longitude } = coords;
+
       try {
+        const { latitude, longitude } = coords;
         const [currentResponse, hourlyResponse, dailyResponse] =
           await Promise.all([
             api.getCurrentWeather(latitude, longitude),
@@ -72,16 +58,15 @@ export function useWeatherData(): {
         setDailyForecast(daily);
         setHourlyForecast(hourly);
 
-        localStorage.setItem("current", JSON.stringify(current));
-        localStorage.setItem("daily", JSON.stringify(daily));
-        localStorage.setItem("hourly", JSON.stringify(hourly));
-        localStorage.setItem("timestamp", JSON.stringify(Date.now()));
+        setToStore({ current, daily, hourly });
       } catch (err) {
         console.error(err);
       } finally {
         setIsLoading(false);
       }
-    })();
+    }
+
+    fetch();
   }, []);
 
   return { currentWeather, hourlyForecast, dailyForecast, isLoading };
