@@ -37,8 +37,8 @@ export function useWeatherData(): {
         [GeolocationCoordinates | null, unknown]
       >((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(
-          ({ coords }) => resolve([coords, null]),
-          (error) => reject([null, error]),
+          (p) => resolve(p.coords),
+          (e) => toast.error(e.message),
           { enableHighAccuracy: false, maximumAge: 3600 * 1000 * 24 }
         );
       });
