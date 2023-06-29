@@ -1,0 +1,21 @@
+{
+  "short_name": "Weather",
+  "name": "Weather app",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "144x144 64x64 32x32 24x24 16x16",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

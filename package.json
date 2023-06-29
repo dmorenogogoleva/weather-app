@@ -2,18 +2,47 @@
   "name": "react",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://dmorenogogoleva.github.io/weather-app/",
   "dependencies": {
+    "axios": "^1.4.0",
+    "dotenv": "^16.1.4",
+    "gh-pages": "^5.0.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-hot-toast": "^2.4.1",
+    "workbox-background-sync": "^6.6.0",
+    "workbox-broadcast-update": "^6.6.0",
+    "workbox-cacheable-response": "^6.6.0",
+    "workbox-core": "^6.6.0",
+    "workbox-google-analytics": "^6.6.0",
+    "workbox-navigation-preload": "^6.6.0",
+    "workbox-precaching": "^6.6.0",
+    "workbox-range-requests": "^6.6.0",
+    "workbox-routing": "^6.6.0",
+    "workbox-streams": "^6.6.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test --env=jsdom --watchAll=false",
+    "prepare": "husky install",
+    "create-hook": "husky add .husky/pre-commit \"npm test\"",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "react-scripts": "latest"
+    "@types/jest": "^29.5.2",
+    "@types/react": "^18.2.8",
+    "@types/react-dom": "^18.2.4",
+    "husky": "^8.0.3",
+    "react-error-overlay": "6.0.9",
+    "react-scripts": "^4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   },
   "browserslist": {
     "production": [

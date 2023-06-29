@@ -1,50 +1,49 @@
 # 0+X Test Assignment: Weather App
 
-In this assignment, you will complete a weather app that was started by another developer. Your tasks are to **add new features** and **improve the source code**.
+<https://dmorenogogoleva.github.io/weather-app>
 
-The app so far is written in plain JavaScript. Set up **TypeScript** and finish the app using TS.
+[![performance metrics](https://i.gyazo.com/a93f1c7575b0e5fb2d5821523aec6ebb.png)](https://gyazo.com/a93f1c7575b0e5fb2d5821523aec6ebb)
 
-Please, make sure to **document you solutions** in a Markdown file and attach it to the project.
+I've improved developer experience by updating architecture, setting up Typescript, handle errors via ErrorBoundary, and adding unit-tests that run before every commit.
 
-Prepare and send us your solution as a **GitHub repository**. Use the existing code as the initial project state and create a **PR with all the changes** you're going to make.
+I've improved user experience by using semantic html-tags, updating UI for tablets and desktop, and storing weather data in local storage that reduces loading time. Also I've made the app installable and work offline via servise worker.
 
-## New Features
+## Implemented features
 
-Extend the functionality of the app with new features:
+- replaced the dummy data with the real data, using [Weatherbit](https://api.weatherbit.io/v2.0) API
+- added update of background, depending on user's local time
+- created "Loading" screen with a spinner
+- improve the current location detection, showing current city name
 
-1. Replace the dummy app data with **real weather data** by using the [AccuWeather API](https://developer.accuweather.com/packages) or other weather API providers of your choice. You can use any library for network requests, caching data, and managing data flow or app life cycle.
-2. Update the background of the app to **show different gradients** based on the user's **local time**. You will find all gradient variations in [this Figma file](https://www.figma.com/file/9ZAG6Hk7Csm58IeStWn5GZ/0%2BX-Test-Assignment%3A-Weather-App).
-3. Create a **“Loading” screen** for the app with any loading indicator in it.
+##  Fixed bugs
 
-## Bug Fixes
+- The Hourly Forecast card is scrollable now
+- Columns in “10-Day Forecast” form a straight line
+- Each row of the “10-Day Forecast” contains a temperature range with a gradient based on the lowest and highest temperature for the 10-day period. Current temperature is placed on that range
 
-Fix the bugs in the source code.
+### start
 
-- The “Hourly Forecast” section should have a **scrollable list** of weather conditions for each hour until the next day.
-- The “10-Day Forecast” section should have columns that **form a straight line** as [in the design](https://www.figma.com/file/9ZAG6Hk7Csm58IeStWn5GZ/0%2BX-Test-Assignment%3A-Weather-App).
-- Each row of the “10-Day Forecast” should contain a temperature range with a gradient based on the lowest and highest temperature **for the whole 10-day period**. The temperatures of the current day (min, max, avg) should be placed on that range.
+```bash
+npm install
 
-## Best Practices
+npm start
+```
 
-Improve the quality of the existing source code by fixing poor solutions and implementing better practices. Pay attention to **any issues you find**, such as:
+the app should be accessible over http on port 3000 at:
 
-- Accessibility problems
-- Brittle components
-- Unoptimal styling
-- Low performance
-- High coupling
-- Poor architecture
-- Bad code metrics, etc
+```bash
+http://localhost:3000
 
-## Performance
+```
 
-Ensure that the app is performant by **measuring** web vitals or other relevant characteristics. Add those to the documentation file.
+### test
 
-## Additional Features
+```bash
+npm run test
+```
 
-The following features are **optional, so you can skip them** if you don't have enough time.
+### build
 
-- Adapt the UI for **wider screens** (tablets and desktops), make sure there aren't any rendering issues.
-- Improve the current location detection feature by showing the current **city name** instead of “Current Location” when the app gets access to the user's location.
-- Handle any network errors **gracefully** to prevent “data flashing” on the screen.
-- Make the app “installable” and **work offline**. You might need to save the latest data locally on the device to show it when offline.
+```bash
+npm run build
+```
